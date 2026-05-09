@@ -116,7 +116,3 @@ code-archeologist/
 ## Caching
 
 Reports are cached in `backend/cache.db` keyed by `repo URL + latest commit hash`. If you analyze the same repo twice and nothing has changed, the cached report is returned instantly with no API calls.
-
----
-
-*Built with the Anthropic API. Not affiliated with Anthropic.*
