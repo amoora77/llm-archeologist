@@ -626,3 +626,45 @@ The difference between a cool project and a forgettable one is output quality. T
 4. **The Archeologist's Note is the money section.** This should be the most opinionated, most interesting paragraph in the report. Prompt it explicitly to be opinionated.
 
 5. **Ghost code is almost always the most interesting section.** Make sure the detection is good — if a directory had >5 commits and was then deleted, it's worth narrating.
+
+---
+
+## Build Progress
+
+> Last updated: 2026-05-08
+
+### Phase 1 — Backend Core
+- [x] Set up Python project with `uv`, install dependencies (`backend/pyproject.toml`, `.venv`)
+- [x] `backend/models.py` — all dataclasses (Commit, Era, Contributor, Pivot, GhostSystem, ContributorStats, RepoReport)
+- [x] `backend/cache.py` — SQLite caching layer (init_db, get/store by cache key, job tracking)
+- [ ] `backend/extractor.py` — **NEXT: git history extraction**
+- [ ] `backend/processor.py` — era detection, contributor stats, ghost system detection
+- [ ] Test extraction + processing pipeline on 3 real repos
+
+### Phase 2 — LLM Pipeline
+- [ ] `backend/prompts.py`
+- [ ] `backend/summarizer.py`
+- [ ] `backend/narrator.py`
+- [ ] Prompt caching + streaming
+
+### Phase 3 — API
+- [ ] `backend/main.py` — FastAPI app with SSE endpoint
+
+### Phase 4 — Frontend
+- [ ] Next.js 14 project setup (bun, Tailwind, shadcn/ui)
+- [ ] Landing page (`/`)
+- [ ] Progress/streaming view
+- [ ] Report view (`/report/[id]`) — all sections
+- [ ] recharts timeline
+- [ ] HTML export
+
+### Phase 5 — Polish
+- [ ] Demo reports for React, FastAPI, sqlite repos
+- [ ] Deploy (Railway + Vercel)
+- [ ] README with GIF demo
+
+### Decisions Made During Build
+- Python 3.14 (latest available via Homebrew) — uv-managed venv at `backend/.venv`
+- venv activation: `source backend/.venv/bin/activate`
+- Cache DB written to `backend/cache.db` (gitignored)
+- `RepoReport` uses `archeologists_note` as a separate field from `present_state`
