@@ -1,0 +1,17 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/*.pyc
+backend/cache.db
+backend/.env
+
+# Cloned repos (temp storage during analysis)
+backend/repos/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# Misc
+.DS_Store
+*.env.local

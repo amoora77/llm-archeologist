@@ -631,21 +631,21 @@ The difference between a cool project and a forgettable one is output quality. T
 
 ## Build Progress
 
-> Last updated: 2026-05-08
+> Last updated: 2026-05-09
 
 ### Phase 1 — Backend Core
 - [x] Set up Python project with `uv`, install dependencies (`backend/pyproject.toml`, `.venv`)
 - [x] `backend/models.py` — all dataclasses (Commit, Era, Contributor, Pivot, GhostSystem, ContributorStats, RepoReport)
 - [x] `backend/cache.py` — SQLite caching layer (init_db, get/store by cache key, job tracking)
-- [ ] `backend/extractor.py` — **NEXT: git history extraction**
-- [ ] `backend/processor.py` — era detection, contributor stats, ghost system detection
+- [x] `backend/extractor.py` — git history extraction, mass deletion detection, rename detection, clone_repo
+- [x] `backend/processor.py` — era detection, contributor stats, file churn, dark periods, ghost system detection
 - [ ] Test extraction + processing pipeline on 3 real repos
 
 ### Phase 2 — LLM Pipeline
-- [ ] `backend/prompts.py`
-- [ ] `backend/summarizer.py`
-- [ ] `backend/narrator.py`
-- [ ] Prompt caching + streaming
+- [x] `backend/prompts.py` — all prompt templates (system, era, contributor, pivot, origin story, ghost system, final synthesis)
+- [x] `backend/summarizer.py` — summarize_era, generate_contributor_profile, classify_pivot, narrate_ghost_system (prompt caching on system block)
+- [ ] `backend/narrator.py` — **⬅ NEXT: origin story + final synthesis generation**
+- [ ] Streaming support (SSE progress events)
 
 ### Phase 3 — API
 - [ ] `backend/main.py` — FastAPI app with SSE endpoint
@@ -667,4 +667,6 @@ The difference between a cool project and a forgettable one is output quality. T
 - Python 3.14 (latest available via Homebrew) — uv-managed venv at `backend/.venv`
 - venv activation: `source backend/.venv/bin/activate`
 - Cache DB written to `backend/cache.db` (gitignored)
+- `.env` holds `ANTHROPIC_API_KEY` (gitignored); see `backend/.env.example`
 - `RepoReport` uses `archeologists_note` as a separate field from `present_state`
+- Ghost system prompt added beyond original spec for richer deleted-code narration
