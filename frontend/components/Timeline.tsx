@@ -7,7 +7,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Cell,
 } from "recharts";
 import { motion } from "framer-motion";
 import type { Era } from "@/lib/api";
@@ -56,6 +55,22 @@ export default function Timeline({ eras }: { eras: Era[] }) {
   });
 
   const maxDensity = Math.max(...data.map((d) => d.density), 1);
+
+  function CustomBar(props: Record<string, number>) {
+    const { x, y, width, height, density } = props;
+    const lightness = Math.round(18 + (density / maxDensity) * 52);
+    return (
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill={`oklch(${lightness}% 0 0)`}
+        rx={3}
+        ry={3}
+      />
+    );
+  }
   const totalMs =
     new Date(eras.at(-1)!.end_date).getTime() -
     new Date(eras[0].start_date).getTime();
