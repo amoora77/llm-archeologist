@@ -106,7 +106,7 @@ export default function Timeline({ eras }: { eras: Era[] }) {
               transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
               style={{
                 width: `${width}%`,
-                backgroundColor: ERA_COLORS[i % ERA_COLORS.length],
+                backgroundColor: `oklch(${Math.round(20 + (i / Math.max(eras.length - 1, 1)) * 40)}% 0 0)`,
               }}
               className="h-full"
             />
