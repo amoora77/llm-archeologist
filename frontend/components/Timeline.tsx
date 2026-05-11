@@ -11,15 +11,6 @@ import {
 import { motion } from "framer-motion";
 import type { Era } from "@/lib/api";
 
-const ERA_COLORS = [
-  "#2a2a2a",
-  "#333",
-  "#3d3d3d",
-  "#474747",
-  "#525252",
-  "#5e5e5e",
-  "#6a6a6a",
-];
 
 interface TooltipProps {
   active?: boolean;
@@ -96,18 +87,7 @@ export default function Timeline({ eras }: { eras: Era[] }) {
             content={<CustomTooltip />}
             cursor={{ fill: "rgba(255,255,255,0.02)" }}
           />
-          <Bar dataKey="density" radius={[3, 3, 0, 0]}>
-            {data.map((d, i) => {
-              const intensity = d.density / maxDensity;
-              const lightness = Math.round(18 + intensity * 52);
-              return (
-                <Cell
-                  key={i}
-                  fill={`oklch(${lightness}% 0 0)`}
-                />
-              );
-            })}
-          </Bar>
+          <Bar dataKey="density" shape={<CustomBar />} />
         </BarChart>
       </ResponsiveContainer>
 
