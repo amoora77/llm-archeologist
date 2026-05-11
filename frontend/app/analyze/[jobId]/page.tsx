@@ -42,7 +42,8 @@ export default function AnalyzePage() {
   }, []);
 
   useEffect(() => {
-    const es = new EventSource(`/api/analyze/${params.jobId}/stream`);
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8000";
+    const es = new EventSource(`${backendUrl}/api/analyze/${params.jobId}/stream`);
 
     es.onmessage = (e) => {
       const data = JSON.parse(e.data);
